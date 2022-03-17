@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Построение криволинейных поверхностей</title>
+    <script src="https://cdn.plot.ly/plotly-2.9.0.min.js"></script>
+    <script src="https://unpkg.com/vis-graph3d@latest/dist/vis-graph3d.min.js"
+    ></script>
+</head>
+<body>
+<p>Hello world!</p>
+<input type="text" id="func" value="x**2-y**2"><Br>
+  <input id="butt" type="button" value="Кнопка"/><br><br>
+  <div id="str"></div>
+  <div id="line-chart"></div>
+  <script>
+    
+  butt.onclick = function() {
+    var val = document.getElementById('func').value;
+    document.getElementById('str').innerHTML="Вы ввели: "+val;
+    data = new vis.DataSet();
+        // create some nice looking data with sin/cos
+        var counter = 0;
+        for (var x = -5; x < 5; x += 0.25) {
+          for (var y = -5; y < 5; y += 0.25) {
+            var value = eval(val);
+            data.add({ id: counter++, x: x, y: y, z: value, style: value });
+          }
+        }
+
+        // specify options
+        var options = {
+          width: "600px",
+          height: "600px",
+          style: "surface",
+          showPerspective: true,
+          showGrid: true,
+          showShadow: false,
+          keepAspectRatio: true,
+          verticalRatio: 0.5,
+        };
+
+        // Instantiate our graph object.
+        var container = document.getElementById("line-chart");
+        graph = new vis.Graph3d(container, data, options);
+};
+</script>
+</body>
+</html>
